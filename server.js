@@ -5,7 +5,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 const wss = new WebSocket.Server({ port: process.env.PORT || 8080 });
 const binanceWs = new WebSocket('wss://stream.binance.com:9443/stream');
 
-const currencies = ['btcusdt', 'ethusdt', 'bnbusdt', 'xrpusdt', 'adausdt', 'solusdt', 'dogeusdt', 'trxusdt', 'avaxusdt', 'shibusdt', 'linkusdt', 'maticusdt', 'dotusdt', 'nearusdt', 'ltcusdt', 'uniusdt', 'pepeusdt', 'bchusdt', 'icpusdt', 'aptusdt', 'xlmusdt', 'etcusdt', 'filusdt', 'arbusdt', 'aaveusdt', 'cakeusdt', 'sandusdt', 'galausdt', 'thetausdt', 'algousdt', 'axsusdt', 'vetusdt', 'eousdt', 'neousdt', 'iotausdt', 'ftmusdt', 'kavausdt', 'zilusdt', 'batusdt', 'enjusdt', 'ondousdt', 'bigtimeusdt', 'virtualusdt', '1inchusdt', 'aceusdt', 'achusdt', 'acmusdt', 'aergousdt', 'agldusdt', 'aliceusdt', 'ampusdt', 'ankrusdt', 'apeusdt', 'api3usdt', 'arusdt', 'arkusdt', 'arkmusdt', 'astusdt', 'astrusdt', 'atomusdt', 'auctionusdt', 'audiousdt', 'balusdt', 'bandusdt', 'barusdt', 'belusdt', 'bico usdt', 'bifiusdt', 'blurusdt', 'bonkusdt', 'burgerusdt', 'c98usdt', 'celousdt', 'celrusdt', 'cfxusdt', 'chessusdt', 'chrusdt', 'chzusdt', 'cityusdt', 'ckbusdt', 'compusdt', 'cotiusdt', 'crvusdt', 'ctkusdt', 'ctsiusdt', 'cvxusdt', 'cyberusdt', 'dashusdt', 'dcrusdt', 'dentusdt', 'dfusdt', 'dgbusdt', 'diausdt', 'dodousdt', 'dydxusdt', 'egldusdt', 'elfusdt', 'enausdt', 'ensusdt'];
+const currencies = ['btcusdt', 'ethusdt', 'bnbusdt', 'xrpusdt', 'adausdt', 'solusdt', 'dogeusdt', 'trxusdt', 'avaxusdt', 'shibusdt'];
 
 binanceWs.on('open', () => {
   console.log('Connected to Binance WebSocket');
