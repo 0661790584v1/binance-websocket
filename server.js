@@ -18,6 +18,7 @@ binanceWs.on('open', () => {
 
 binanceWs.on('message', async (data) => {
   try {
+    console.log('Received Binance message:', data.toString());
     const msg = JSON.parse(data);
     if (msg.stream && msg.data.e === 'aggTrade') {
       const price = parseFloat(msg.data.p);
@@ -30,16 +31,22 @@ binanceWs.on('message', async (data) => {
           type: msg.data.m ? 'sell' : 'buy',
           timestamp: msg.data.E
         };
+        console.log('Valid order:', order);
         const { error } = await supabase.from('orders').insert([order]);
         if (error) {
           console.error('Supabase insert error:', error);
         } else {
-          console.log('Inserted order:', order);
+          console.log('Inserted order to Supabase:', order);
         }
-        wss.clients.forEach(client => client.send(JSON.stringify(order)));
+        wss.clients.forEach(client => {
+          client.send(JSON.stringify(order));
+          console.log('Sent order to client:', order);
+        });
       } else {
         console.error('Invalid price or volume:', { price, volume });
       }
+    } else {
+      console.log('Non-aggTrade message:', msg);
     }
   } catch (error) {
     console.error('Error processing Binance message:', error);
@@ -47,6 +54,7 @@ binanceWs.on('message', async (data) => {
 });
 
 wss.on('connection', (ws) => {
+  console.log('Client connected');
   ws.send('Connected to server');
 });
 
